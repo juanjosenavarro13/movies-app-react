@@ -1,10 +1,8 @@
 .home_container {
-  font-family: Arial, sans-serif;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  background-color: #f0f0f0;
   padding: 20px;
   margin: 0;
 }
