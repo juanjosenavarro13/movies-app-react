@@ -3,13 +3,26 @@ import { useMovieList } from '../../fetch/movieList';
 import { CardMovie } from '../components';
 import Pagination from '../components/pagination/pagination';
 import './home.css';
+import Search from '../components/search/search';
 
 export default function HomePage() {
   const [actualPage, setActualPage] = useState<number>(1);
-  const { data, isLoading, isError } = useMovieList({ page: actualPage });
+  const [actualTitle, setActualTitle] = useState<string>('harry potter');
+
+  const { data, isLoading, isError } = useMovieList({
+    page: actualPage,
+    title: actualTitle,
+  });
+
+  const handleSearch = (title: string) => {
+    setActualTitle(title);
+  };
 
   return (
-    <div style={{ justifyContent: 'center' }}>
+    <>
+      {!isLoading && !isError && data && (
+        <Search value={actualTitle} onSearch={handleSearch} />
+      )}
       <div className="home_container">
         {!isLoading && isError && <p>Ha ocurrido un error</p>}
         {isLoading && <p>Cargando</p>}
@@ -24,6 +37,6 @@ export default function HomePage() {
       {!isLoading && !isError && data && (
         <Pagination actualPage={actualPage} onChangePage={setActualPage} />
       )}
-    </div>
+    </>
   );
 }

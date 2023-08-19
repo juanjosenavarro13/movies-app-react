@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react';
 import { appConstants } from '../shared/constants/app.constant';
-import { Props, Response } from './movieList.d';
+import { Response } from './movieList.d';
+
+export interface Props {
+  page: number;
+  title: string;
+}
 
 export function useMovieList(props: Props) {
-  const { page = 1 } = props;
+  const { page, title } = props;
+  const normalizeTitle = title.replace(' ', '+').trimEnd().trimStart();
   const url: string =
-    appConstants.api_uri + `&s=harry+potter&plot=short&page=${page}`;
+    appConstants.api_uri + `&s=${normalizeTitle}&plot=short&page=${page}`;
   const [data, setData] = useState<Response>();
   const [isLoading, setIsloading] = useState<boolean>(true);
   const [isError, setError] = useState<boolean>(false);

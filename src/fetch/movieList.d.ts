@@ -1,7 +1,3 @@
-export interface Props {
-  page: number;
-}
-
 export interface Response {
   Response: string;
   Search: Movie[];
