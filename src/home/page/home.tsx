@@ -35,7 +35,11 @@ export default function HomePage() {
         )}
       </div>
       {!isLoading && !isError && data && (
-        <Pagination actualPage={actualPage} onChangePage={setActualPage} />
+        <Pagination
+          actualPage={actualPage}
+          onChangePage={setActualPage}
+          totalResults={data.totalResults}
+        />
       )}
     </>
   );

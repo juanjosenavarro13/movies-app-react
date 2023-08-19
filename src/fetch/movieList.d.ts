@@ -1,7 +1,7 @@
 export interface Response {
   Response: string;
   Search: Movie[];
-  totalResult: number;
+  totalResults: number;
 }
 
 export type Movie = {

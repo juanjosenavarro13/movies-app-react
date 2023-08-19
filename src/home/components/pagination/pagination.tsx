@@ -2,11 +2,14 @@ import './pagination.css';
 
 interface Props {
   actualPage: number;
+  totalResults: number;
   onChangePage: (page: number) => void;
 }
 
 export default function Pagination(props: Props) {
-  const { actualPage, onChangePage } = props;
+  const { actualPage, onChangePage, totalResults } = props;
+
+  const maxPage = Math.round(totalResults / 10);
 
   const handleChangePage = (page: number) => {
     onChangePage(page);
@@ -47,30 +50,36 @@ export default function Pagination(props: Props) {
       <button type="button" className="active">
         {actualPage}
       </button>
-      <button
-        type="button"
-        onClick={() => {
-          handleChangePage(actualPage + 1);
-        }}
-      >
-        {actualPage + 1}
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          handleChangePage(actualPage + 2);
-        }}
-      >
-        {actualPage + 2}
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          handleChangePage(actualPage + 1);
-        }}
-      >
-        Siguiente &raquo;
-      </button>
+      {actualPage + 1 < maxPage && (
+        <button
+          type="button"
+          onClick={() => {
+            handleChangePage(actualPage + 1);
+          }}
+        >
+          {actualPage + 1}
+        </button>
+      )}
+      {actualPage + 2 < maxPage && (
+        <button
+          type="button"
+          onClick={() => {
+            handleChangePage(actualPage + 2);
+          }}
+        >
+          {actualPage + 2}
+        </button>
+      )}
+      {actualPage + 1 < maxPage && (
+        <button
+          type="button"
+          onClick={() => {
+            handleChangePage(actualPage + 1);
+          }}
+        >
+          Siguiente &raquo;
+        </button>
+      )}
     </div>
   );
 }
