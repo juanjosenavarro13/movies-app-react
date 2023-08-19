@@ -9,7 +9,7 @@ export interface Props {
 
 export function useMovieList(props: Props) {
   const { page, title } = props;
-  const normalizeTitle = title.replace(' ', '+').trimEnd().trimStart();
+  const normalizeTitle = title.trim().replace(/\s+/g, ' ').replace(' ', '+');
   const url: string =
     appConstants.api_uri + `&s=${normalizeTitle}&plot=short&page=${page}`;
   const [data, setData] = useState<Response>();
@@ -22,11 +22,13 @@ export function useMovieList(props: Props) {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
+        if (data.Response === 'False') throw new Error(data.Error);
         setData(data);
         setIsloading(false);
       })
       .catch(() => {
         setError(true);
+        setIsloading(false);
       });
   }, [url]);
 

@@ -17,7 +17,7 @@ export default function Search(props: Props) {
     }, 1000);
 
     return () => clearTimeout(delayAction);
-  }, [inputValue, onSearch]);
+  }, [inputValue]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);

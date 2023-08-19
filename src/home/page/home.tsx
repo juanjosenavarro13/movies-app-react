@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useMovieList } from '../../fetch/movieList';
 import { CardMovie } from '../components';
 import Pagination from '../components/pagination/pagination';
-import './home.css';
 import Search from '../components/search/search';
+import './home.css';
 
 export default function HomePage() {
   const [actualPage, setActualPage] = useState<number>(1);
@@ -15,16 +15,17 @@ export default function HomePage() {
   });
 
   const handleSearch = (title: string) => {
+    setActualPage(1);
     setActualTitle(title);
   };
 
   return (
     <>
-      {!isLoading && !isError && data && (
-        <Search value={actualTitle} onSearch={handleSearch} />
-      )}
+      <Search value={actualTitle} onSearch={handleSearch} />
       <div className="home_container">
-        {!isLoading && isError && <p>Ha ocurrido un error</p>}
+        {!isLoading && isError && (
+          <p>Ha ocurrido un error, intenta buscar otro titulo</p>
+        )}
         {isLoading && <p>Cargando</p>}
         {!isLoading && !isError && data && (
           <>
