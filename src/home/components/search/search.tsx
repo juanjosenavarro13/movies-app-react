@@ -17,6 +17,7 @@ export default function Search(props: Props) {
     }, 1000);
 
     return () => clearTimeout(delayAction);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
