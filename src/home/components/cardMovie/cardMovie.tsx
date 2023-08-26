@@ -14,9 +14,7 @@ export function CardMovie(props: Props) {
     <div className="cardMovie_card" key={imdbID}>
       <img src={Poster} alt="Película 1" />
       <h3>{Title}</h3>
-      <p>
-        {Year} - {Type}
-      </p>
+      <p>{Year}</p>
       <Link to={`/${Type}/${imdbID}`}>Ver más</Link>
     </div>
   );
